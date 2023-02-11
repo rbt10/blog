@@ -1,0 +1,12 @@
+<div class="card m-3" style="width: 18rem;">
+    {%  if post.thumbnail %}
+        <img class="card-img-top rounded" src="{{ vich_uploader_asset( post.thumbnail, 'imageFile') }}" alt=" {{ post.thumbnail.imageName }}">
+    {% endif %}
+
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content |u.truncate(100)}}.</p>
+        <a href="#" class="btn btn-sm btn-primary">Lire Plus ...</a>
+
+    </div>
+</div>
