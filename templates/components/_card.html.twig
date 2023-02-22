@@ -4,9 +4,12 @@
     {% endif %}
 
     <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
+        <a href="{{ path("app_show", { slug: post.slug }) }}">
+            <h5 class="card-title fs-4 text-capitalize">{{ post.title }}</h5>
+        </a>
+
         <p class="card-text">{{ post.content |u.truncate(100)}}.</p>
-        <a href="#" class="btn btn-sm btn-primary">Lire Plus ...</a>
+        <a href="{{ path("app_show", {slug: post.slug }) }}" class="btn btn-sm btn-primary">Lire Plus ...</a>
 
     </div>
 </div>

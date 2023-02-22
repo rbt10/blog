@@ -5,6 +5,7 @@ namespace App\Repository\Post;
 use App\Entity\Post\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Posts>
@@ -16,19 +17,26 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator)
     {
         parent::__construct($registry, Posts::class);
     }
 
-    public function findPublished() : array
+    /**
+     * @param int $page
+     *
+     */
+    public function findPublished(int $page)
     {
-        return $this->createQueryBuilder('p')
+        $data =  $this->createQueryBuilder('p')
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISH%')
             ->addOrderBy('p.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
+        $posts = $this->paginator->paginate($data,$page,12);
+
+        return $posts;
 
     }
 
