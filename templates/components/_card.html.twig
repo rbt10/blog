@@ -4,7 +4,7 @@
     {% endif %}
 
     <div class="card-body">
-        <a href="{{ path("app_show", { slug: post.slug }) }}">
+        <a class="nav-link" href="{{ path("app_show", { slug: post.slug }) }}">
             <h5 class="card-title fs-4 text-capitalize">{{ post.title }}</h5>
         </a>
 

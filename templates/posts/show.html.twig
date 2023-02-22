@@ -3,19 +3,24 @@
 {% block title %}{{ post.title}} {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container my-4">
         <div class="row">
-            <a class="text-sm-start" href="{{ path("app_posts") }}">Retour au blog</a>
+            <div class="col-3">
+                <a class="btn btn-primary btn-sm" href="{{ path("app_posts") }}">Retour au blog</a>
+            </div>
+
         </div>
         <div class="row">
-            <h1 class="display-6">{{ post.title|capitalize}}</h1>
-            <h5>Publié le {{ post.createdAt|date('d/m/Y') }}</h5>
+            <h1 class="display-6 d-flex justify-content-center">{{ post.title|capitalize}}</h1>
+            <p class="d-flex justify-content-center">Publié le {{ post.createdAt|date('d/m/Y') }}</p>
             {%  if post.thumbnail %}
                 <img class="card-img-top rounded" src="{{ vich_uploader_asset( post.thumbnail, 'imageFile') }}" alt=" {{ post.thumbnail.imageName }}">
             {% endif %}
 
             <p>{{ post.content|raw }}</p>
             <p>Dernière mise à jour le :{{ post.updatedAt|date('d/m/Y') }}</p>
+
+            {% include "components/_share.html.twig" %}
         </div>
 
     </div>
