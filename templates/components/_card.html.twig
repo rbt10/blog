@@ -8,6 +8,9 @@
             <h5 class="card-title fs-4 text-capitalize">{{ post.title }}</h5>
         </a>
 
+        {% include "components/_badges.html.twig" with {
+            badges: post.categories
+        } only %}
         <p class="card-text">{{ post.content |u.truncate(100)}}.</p>
         <a href="{{ path("app_show", {slug: post.slug }) }}" class="btn btn-sm btn-primary">Lire Plus ...</a>
 

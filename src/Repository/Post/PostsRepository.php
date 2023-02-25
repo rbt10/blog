@@ -2,6 +2,7 @@
 
 namespace App\Repository\Post;
 
+use App\Entity\Post\Category;
 use App\Entity\Post\Posts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,6 +40,8 @@ class PostsRepository extends ServiceEntityRepository
         return $posts;
 
     }
+
+
 
 //    /**
 //     * @return Posts[] Returns an array of Posts objects

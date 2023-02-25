@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Post\Posts;
+use App\Form\SearchType;
+use App\Model\SearchData;
 use App\Repository\Post\PostsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +18,25 @@ class PostsController extends AbstractController
     #[Route('/', name: 'app_posts', methods: ['GET'])]
     public function index(PostsRepository $postsRepository, PaginatorInterface $paginator,Request $request): Response
     {
+        $search = new SearchData();
+        $form = $this->createForm(SearchType::class, $search);
+
+        $form->handleRequest($request);
+
+        if(  $form->isSubmitted() && $form->isValid()){
+            $search->page = $request->query->getInt('page',1);
+            $posts = $postsRepository->findSearch($search);
+            return $this->render('posts/index.html.twig',[
+                'form'=>$form,
+                'posts'=>$posts
+
+            ]);
+        }
         $posts = $postsRepository->findPublished( $request->query->getInt('page',1));
 
-
-
         return $this->render('posts/index.html.twig',[
-            'posts'=>$posts
+            'posts'=>$posts,
+            'form'=>$form->createView()
         ]);
     }
 

@@ -1,21 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Blog Posts{% endblock %}
-
-{% block body %}
-
-<div class="container">
-   <h1 class="text-center mt-5">Blog symfony</h1>
-
-   <div class="row mt-5">
-      {% for post in posts %}
-          {% include 'components/_card.html.twig' %}
-      {% endfor %}
-
-   </div>
-   <div class="justify-content-center pagination mt-5">
-        <p>{{ knp_pagination_render(posts)}}</p>
-   </div>
-
-</div>
-{% endblock %}
+{% include 'layouts/_blog.hml.twig' with {
+   title : "Kinshasa na biso, blog créé avec Symfony",
+   posts : posts
+} %}

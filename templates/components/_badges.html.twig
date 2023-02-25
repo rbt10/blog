@@ -1,0 +1,11 @@
+{% if badges %}
+    <div>
+        {% for badge in badges  %}
+            <span class="badge rounded-pill text-bg-primary">
+                <a class="nav-link" href="{{ path("app_category", {slug: badge.slug}) }}">{{ badge.name }}</a>
+            </span>
+
+        {% endfor %}
+
+    </div>
+{% endif %}

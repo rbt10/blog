@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+
+ <div class="container">
+     <div class="row">
+         <h1>{{ category.name }}</h1>
+     </div>
+     <div class="row">
+         {% for post in posts %}
+             <div class="card m-3" style="width: 18rem;">
+                 {%  if post.thumbnail %}
+                     <img class="card-img-top rounded" src="{{ vich_uploader_asset( post.thumbnail, 'imageFile') }}" alt=" {{ post.thumbnail.imageName }}">
+                 {% endif %}
+
+                 <div class="card-body">
+                     <a class="nav-link" href="{{ path("app_show", { slug: post.slug }) }}">
+                         <h5 class="card-title fs-4 text-capitalize">{{ post.title }}</h5>
+                     </a>
+
+                     {% include "components/_badges.html.twig" with {
+                         badges: post.categories
+                     } only %}
+                     <p class="card-text">{{ post.content |u.truncate(100)}}.</p>
+                     <a href="{{ path("app_show", {slug: post.slug }) }}" class="btn btn-sm btn-primary">Lire Plus ...</a>
+
+                 </div>
+             </div>
+
+
+
+
+
+         {% endfor %}
+    </div>
+ </div>
+{% endblock %}

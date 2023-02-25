@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="text-center mt-5">{{ title }}</h1>
+
+        {% include 'components/_searchData.html.twig' with {
+            form:form
+        }only %}
+
+        <div class="row mt-5">
+            {% for post in posts %}
+                {% include 'components/_card.html.twig' %}
+            {% endfor %}
+
+        </div>
+        <div class="d-flex justify-content-center pagination mt-5">
+            {{ knp_pagination_render(posts)}}
+        </div>
+
+    </div>
+{% endblock %}
