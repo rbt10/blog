@@ -25,9 +25,9 @@ class PostsController extends AbstractController
 
         if(  $form->isSubmitted() && $form->isValid()){
             $search->page = $request->query->getInt('page',1);
-            $posts = $postsRepository->findSearch($search);
+            $posts = $postsRepository->findBySearched($search);
             return $this->render('posts/index.html.twig',[
-                'form'=>$form,
+                'form'=>$form->createView(),
                 'posts'=>$posts
 
             ]);

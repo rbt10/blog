@@ -29,7 +29,7 @@ class CategoryFixtures extends Fixture
         $faker = Faker\Factory::create();
 
         $categories= [];
-        for ($i =0; $i <50; $i++){
+        for ($i =0; $i <10; $i++){
             $categorie = new Category();
             $categorie->setName($faker->word(1, true) . ''. $i)
                 ->setDescription(  $faker->realText(254))
